@@ -1,0 +1,36 @@
+use("shop_db")
+switched to db shop_db
+// 2. Insert 2 order documents into the orders collection (insertOne / insertMany)
+db.orders.insertMany([
+{
+order_code: "ORD-2026-001",
+customer_name: "Nguyen Van A",
+customer_email: "nguyenvana@gmail.com",
+total_amount: 37500000,
+status: "completed",
+items: [
+{ product_name: "Laptop Dell XPS 15", quantity: 1, price: 35000000 },
+{ product_name: "Logitech MX Master 3S Mouse", quantity: 1, price: 2500000 }
+],
+created_at: new Date()
+},
+{
+order_code: "ORD-2026-002",
+customer_name: "Tran Thi B",
+customer_email: "tranthib@gmail.com",
+total_amount: 2200000,
+status: "pending",
+items: [
+{ product_name: "Keychron K2 Mechanical Keyboard", quantity: 1, price: 2200000
+}
+],
+created_at: new Date()
+}
+]);
+// 3. Query documents (Find)
+// Find orders with status 'completed'
+db.orders.find({ status: "completed" }).pretty();// 4. Update an order's status (Update)
+db.orders.updateOne(
+{ order_code: "ORD-2026-002" },
+{ $set: { status: "processing" } }
+);
